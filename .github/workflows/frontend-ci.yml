@@ -20,6 +20,10 @@ jobs:
         node-version: 18
         cache: npm   # ✅ auto-detects package-lock.json
 
+     # 🔹 Install dependencies
+    - name: Install 
+      run: npm install
+      
     # 🔹 Install dependencies
     - name: Install dependencies
       run: npm ci
