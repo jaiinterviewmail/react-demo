@@ -1,0 +1,23 @@
+name: Issues Context Logger
+
+on:
+  issues:
+    types: [opened, edited, closed]
+
+jobs:
+  echo_context:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo basic context
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Action: ${{ github.event.action }}"
+          echo "Repo: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+
+      - name: Echo issue details
+        run: |
+          echo "Title: ${{ github.event.issue.title }}"
+          echo "Body: ${{ github.event.issue.body }}"
+          echo "User: ${{ github.event.issue.user.login }}"
