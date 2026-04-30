@@ -1,0 +1,11 @@
+name: Run Reusable Workflow
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  call-reusable:
+    uses: ./.github/workflows/reusable.yml
+    with:
+      node-version: 18
