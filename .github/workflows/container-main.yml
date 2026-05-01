@@ -1,0 +1,37 @@
+name: CI with Containers
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # 🐳 main container
+    container:
+      image: node:18
+
+    # 🗄️ service container
+    services:
+      db:
+        image: postgres:15
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+
+    # 🌍 environment variables
+    env:
+      DATABASE_URL: postgres://user:password@db:5432/testdb
+      NODE_ENV: test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install deps
+        run: npm install
+
+      - name: Run tests
+        run: npm test
